@@ -4,7 +4,7 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 
-const Header = () => {
+const Header = ({setQuery}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleToggle = () => {
@@ -16,6 +16,29 @@ const Header = () => {
       <div className="bg-white shadow-md w-full">
         <div className="lg:px-10 px-5 py-4 flex justify-between items-center">
           <div className="flex justify-center items-center gap-2">
+            {/* Hamburger Button */}
+            <div className="lg:hidden">
+              <button
+                onClick={handleToggle}
+                className="text-gray-700 focus:outline-none cursor-pointer"
+              >
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d={
+                      !isOpen ? "M4 6h16M4 12h16M4 18h16" : "M6 18L18 6M6 6l12 12"
+                    }
+                  />
+                </svg>
+              </button>
+            </div>
             <Image
               src="/assets/logoCampus.png"
               className="object-cover"
@@ -47,29 +70,7 @@ const Header = () => {
               </Link>
             </div>
           </div>
-          {/* Hamburger Button */}
-          <div className="lg:hidden">
-            <button
-              onClick={handleToggle}
-              className="text-gray-700 focus:outline-none cursor-pointer"
-            >
-              <svg
-                className="w-6 h-6"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d={
-                    !isOpen ? "M4 6h16M4 12h16M4 18h16" : "M6 18L18 6M6 6l12 12"
-                  }
-                />
-              </svg>
-            </button>
-          </div>
+          
         </div>
         {/* Mobile Navigation */}
         {isOpen && (
