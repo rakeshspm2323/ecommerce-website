@@ -7,7 +7,7 @@ import { useCart } from "@/context/CartContext";
 
 const Header = ({setQuery}) => {
   const [isOpen, setIsOpen] = useState(false);
-    const { cartItems} = useCart();
+    const { cartItems, loginPopup, setLoginPopup} = useCart();
   
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -15,7 +15,7 @@ const Header = ({setQuery}) => {
   console.log("cartItems header",cartItems);
 
   return (
-    <header>
+    <header >
       <div className="bg-white shadow-md w-full">
         <div className="lg:px-10 px-5 py-3 flex justify-between items-center">
           <div className="flex justify-center items-center gap-2">
@@ -55,12 +55,9 @@ const Header = ({setQuery}) => {
           </div>
           <div className="md:hidden">
             <div className="flex justify-end items-center gap-5 text-lg font-semibold">
-              <Link href="/login">
+              <div onClick={()=>setLoginPopup(true)} className="cursor-pointer">
                 <FontAwesomeIcon icon={faUser} className="mr-0.5" />
-              </Link>
-              {/* <Link href="/cart">
-                <FontAwesomeIcon icon={faCartShopping} className="mr-0.5"/>
-              </Link> */}
+              </div>
               <Link href="/cart" className="relative">
                 <FontAwesomeIcon icon={faCartShopping} className="mr-0.5"/>
                 {cartItems.length > 0 && (
@@ -73,12 +70,9 @@ const Header = ({setQuery}) => {
           </div>
           <div className="md:block hidden">
             <div className="flex justify-center items-center gap-10 text-lg font-semibold">
-              <Link href="/login">
+              <div onClick={()=>setLoginPopup(true)} className="cursor-pointer">
                 <FontAwesomeIcon icon={faUser} className="mr-0.5" /> Login
-              </Link>
-              {/* <Link href="/cart">
-                <FontAwesomeIcon icon={faCartShopping} className="mr-0.5"/> Cart
-              </Link> */}
+              </div>
               <Link href="/cart" className="relative">
                 <FontAwesomeIcon icon={faCartShopping} className="mr-0.5"/> Cart
                 {cartItems.length > 0 && (
@@ -134,12 +128,11 @@ const Header = ({setQuery}) => {
               >
                   Refund & Cancellation
               </Link>
-              <Link
-                href="/login"
-                className="text-center text-white bg-blue-500 hover:bg-blue-400 px-7 py-1.5 text-sm font-medium rounded-md shadow-md transition ease-in-out"
+              <button onClick={()=>setLoginPopup(true)}
+                className="text-center text-white bg-teal-500 hover:bg-teal-400 px-7 py-2 text-sm font-medium rounded-md shadow-md transition ease-in-out"
               >
-                Login 
-              </Link>
+                <FontAwesomeIcon icon={faUser} className="mr-0.5" /> Login 
+              </button>
             </nav>
           </div>
         )}

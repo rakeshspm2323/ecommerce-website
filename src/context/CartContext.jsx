@@ -5,6 +5,7 @@ export const useCart = () => useContext(CartContext);
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([]);
+  const [loginPopup, setLoginPopup] = useState(false)
 
   // Load cart from localStorage on first load
   useEffect(() => {
@@ -64,7 +65,9 @@ export function CartProvider({ children }) {
         addToCart,
         incrementQuantity,
         decrementQuantity,
-        removeFromCart
+        removeFromCart,
+        loginPopup, 
+        setLoginPopup,
       }}
     >
       {children}

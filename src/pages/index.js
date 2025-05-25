@@ -1,6 +1,8 @@
 import Footer from "@/components/Footer";
 import Header from "@/components/Header";
+import Login from "@/components/Login";
 import ProductCard from "@/components/ProductCard";
+import { useCart } from "@/context/CartContext";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -13,6 +15,7 @@ export default function Home() {
   const [allRating, setAllRating] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [sortBy, setSortBy] = useState("");
+  const {loginPopup} = useCart();
 
   const [currentPage, setCurrentPage] = useState(1);
   const postsPerPage = 8;
@@ -81,7 +84,8 @@ export default function Home() {
 
   return (
     <>
-      <Header setQuery={setQuery} />
+      {loginPopup && <Login />}
+      <Header />
       <div className="md:px-10 py-10 px-5">
         <input
           className="border border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 text-sm p-2 w-full rounded-md"

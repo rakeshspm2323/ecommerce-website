@@ -13,7 +13,7 @@ export default function ProductCard({ product }) {
     <div className="relative bg-[#fcfcfc] p-4 rounded-md shadow-md hover:shadow-xl border border-gray-200 mt-5">   
       <Link href={`/product/${product.id}`}>
         <Image 
-            className="relative lg:h-52 h-44 w-full object-contain  hover:scale-110 transition duration-300 ease-in-out"
+            className="relative lg:h-52 h-44 w-full object-contain hover:scale-110 transition duration-300 ease-in-out"
             src={product.thumbnail} 
             alt={product.title} width={100} 
             height={100} 
@@ -53,15 +53,13 @@ export default function ProductCard({ product }) {
       </div>
       <h5 className="text-sm text-gray-500">Item Stock : {product?.stock}</h5>
       </div>
-      <p className='absolute top-1 right-1'>
-        {Array.from({ length: Math.ceil(product?.rating) }, (_, index) => (
-          <FontAwesomeIcon
-            key={index}
-            icon={faStar}
-            className="text-orange-500"
-          />
-        ))}
-      </p>
+      <div className='absolute top-0 right-0 bg-green-500 text-white rounded-t-md rounded-l-none px-2 py-1 text-xs'>
+        {product?.rating} 
+        <FontAwesomeIcon
+          icon={faStar}
+          className="ml-1"
+        />
+      </div>
      </div>
   );
 }
