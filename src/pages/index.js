@@ -84,14 +84,14 @@ export default function Home() {
       <Header setQuery={setQuery} />
       <div className="md:px-10 py-10 px-5">
         <input
-          className="border p-2 w-full rounded-md"
+          className="border border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 text-sm p-2 w-full rounded-md"
           placeholder="Search by product title..."
           onChange={(e) => setQuery(e.target.value)}
         />
         {/* Category Filter */}
         <div className="flex flex-col md:flex-row md:items-center md:gap-5 gap-3 mt-5">
           <select
-            className="border p-2 rounded-md capitalize"
+            className="border border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 text-sm p-2 rounded-md capitalize"
             value={selectedCategory}
             onChange={(e) => setSelectedCategory(e.target.value)}
           >
@@ -105,7 +105,7 @@ export default function Home() {
 
           {/* Sort By Filter */}
           <select
-            className="border p-2 rounded-md"
+            className="border border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 text-sm p-2 rounded-md"
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
           >
@@ -113,6 +113,17 @@ export default function Home() {
             <option value="price-low-high">Price : Low to High</option>
             <option value="rating-high-low">Rating : High to Low</option>
           </select>
+          <button  
+            onClick={() => {
+              setQuery("");
+              setSelectedCategory("");
+              setSortBy("");
+              setCurrentPage(1);
+            }} 
+            className="px-4 py-2 rounded-md cursor-pointer lg:w-auto w-full border border-teal-500 text-sm focus:outline-none focus:ring-1 focus:ring-teal-500"
+          >
+            Clear Filter
+          </button>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 md:gap-10 gap-5 mt-5">
@@ -150,7 +161,7 @@ export default function Home() {
                   onClick={() => handlePageChange(pageNum)}
                   className={`px-2 py-1 text-xs rounded border font-medium cursor-pointer ${
                     currentPage === pageNum
-                      ? "bg-blue-500 text-white"
+                      ? "bg-teal-500 text-white"
                       : "bg-white text-gray-700 hover:bg-gray-100"
                   }`}
                 >

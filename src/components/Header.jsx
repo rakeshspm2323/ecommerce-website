@@ -3,18 +3,21 @@ import Link from "next/link";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
+import { useCart } from "@/context/CartContext";
 
 const Header = ({setQuery}) => {
   const [isOpen, setIsOpen] = useState(false);
-
+    const { cartItems} = useCart();
+  
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
+  console.log("cartItems header",cartItems);
 
   return (
     <header>
       <div className="bg-white shadow-md w-full">
-        <div className="lg:px-10 px-5 py-4 flex justify-between items-center">
+        <div className="lg:px-10 px-5 py-3 flex justify-between items-center">
           <div className="flex justify-center items-center gap-2">
             {/* Hamburger Button */}
             <div className="lg:hidden">
@@ -43,34 +46,49 @@ const Header = ({setQuery}) => {
               src="/assets/logoCampus.png"
               className="object-cover"
               alt="logo"
-              width={40}
-              height={40}
+              width={35}
+              height={35}
             />
-            <p className="md:text-3xl text-md font-bold text-black text-nowrap">
+            <p className="md:text-2xl text-md font-bold text-black text-nowrap">
               Shopping <span className="text-teal-500">Cart</span>
             </p>
           </div>
           <div className="md:hidden">
-            <div className="flex justify-end items-center gap-5 text-xl font-semibold">
+            <div className="flex justify-end items-center gap-5 text-lg font-semibold">
               <Link href="/login">
                 <FontAwesomeIcon icon={faUser} className="mr-0.5" />
               </Link>
-              <Link href="/cart">
+              {/* <Link href="/cart">
                 <FontAwesomeIcon icon={faCartShopping} className="mr-0.5"/>
+              </Link> */}
+              <Link href="/cart" className="relative">
+                <FontAwesomeIcon icon={faCartShopping} className="mr-0.5"/>
+                {cartItems.length > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartItems.length}
+                  </span>
+                )}
               </Link>
             </div>
           </div>
           <div className="md:block hidden">
-            <div className="flex justify-center items-center gap-10 text-xl font-semibold">
+            <div className="flex justify-center items-center gap-10 text-lg font-semibold">
               <Link href="/login">
                 <FontAwesomeIcon icon={faUser} className="mr-0.5" /> Login
               </Link>
-              <Link href="/cart">
+              {/* <Link href="/cart">
                 <FontAwesomeIcon icon={faCartShopping} className="mr-0.5"/> Cart
+              </Link> */}
+              <Link href="/cart" className="relative">
+                <FontAwesomeIcon icon={faCartShopping} className="mr-0.5"/> Cart
+                {cartItems.length > 0 && (
+                  <span className="absolute -top-2 -right-4 bg-red-500 text-white text-xs font-semibold rounded-full w-5 h-5 flex items-center justify-center">
+                    {cartItems.length}
+                  </span>
+                )}
               </Link>
             </div>
           </div>
-          
         </div>
         {/* Mobile Navigation */}
         {isOpen && (
