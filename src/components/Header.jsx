@@ -89,7 +89,7 @@ const Header = () => {
         </div>
         {/* Mobile Navigation */}
         {isOpen && (
-          <div className="absolute z-50 w-full left-0 lg:hidden md:px-10 px-4 py-4 bg-gray-100 h-96 max-h-96">
+          <div className="absolute z-50 w-full left-0 lg:hidden md:px-10 px-4 py-4 bg-gray-100 h-[450px] max-h-[500px]">
             <nav className="flex flex-col space-y-4">
               <Link href="/" 
                 className="text-sm font-medium text-gray-700 hover:text-blue-500 hover:underline underline-offset-2"
