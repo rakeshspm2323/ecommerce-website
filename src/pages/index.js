@@ -73,19 +73,22 @@ export default function Home() {
 
   function ProductSkeleton() {
     return (
+      <>
       <div className="bg-gray-100 p-4 rounded-md shadow-md border border-gray-200 animate-pulse mt-5">
         <div className="h-44 w-full bg-gray-300 mb-4 rounded"></div>
         <div className="h-6 bg-gray-300 rounded mb-2 w-3/4"></div>
         <div className="h-5 bg-gray-300 rounded mb-2 w-1/2"></div>
         <div className="h-10 bg-gray-300 rounded w-full"></div>
       </div>
+      </>
     );
   }
 
   return (
     <>
       {loginPopup && <Login />}
-      <Header />
+      <Header/>
+      <div className="pt-[55px]">
       <div className="md:px-10 py-10 px-5">
         <input
           className="border border-teal-500 focus:outline-none focus:ring-1 focus:ring-teal-500 text-sm p-2 w-full rounded-md"
@@ -182,6 +185,7 @@ export default function Home() {
             Next...
           </button>
         </div>
+      </div>
       </div>
       <Footer />
     </>

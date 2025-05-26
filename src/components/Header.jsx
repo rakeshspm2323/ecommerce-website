@@ -4,18 +4,21 @@ import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartShopping, faUser } from "@fortawesome/free-solid-svg-icons";
 import { useCart } from "@/context/CartContext";
+import { logout } from "@/utils/auth";
+import { useRouter } from "next/router";
 
-const Header = ({setQuery}) => {
+const Header = () => {
+  const router = useRouter()
   const [isOpen, setIsOpen] = useState(false);
     const { cartItems, loginPopup, setLoginPopup} = useCart();
   
   const handleToggle = () => {
     setIsOpen(!isOpen);
   };
-  console.log("cartItems header",cartItems);
+  // console.log("cartItems header",cartItems);
 
   return (
-    <header >
+    <header className="fixed top-0 left-0 w-full z-50 ">
       <div className="bg-white shadow-md w-full">
         <div className="lg:px-10 px-5 py-3 flex justify-between items-center">
           <div className="flex justify-center items-center gap-2">
@@ -92,7 +95,7 @@ const Header = ({setQuery}) => {
                 className="text-sm font-medium text-gray-700 hover:text-blue-500 hover:underline underline-offset-2"
               >
                   Home
-              </Link>
+              </Link>  
               <Link href="/" 
                 className="text-sm font-medium text-gray-700 hover:text-blue-500 hover:underline underline-offset-2"
               >
@@ -103,10 +106,10 @@ const Header = ({setQuery}) => {
               >
                   Contact
               </Link>
-              <Link href="/" 
+              <Link href="/add-product" 
                 className="text-sm font-medium text-gray-700 hover:text-blue-500 hover:underline underline-offset-2"
               >
-                  General Query
+                  Add Product
               </Link>
               <Link href="/" 
                 className="text-sm font-medium text-gray-700 hover:text-blue-500 hover:underline underline-offset-2"
@@ -132,6 +135,14 @@ const Header = ({setQuery}) => {
                 className="text-center text-white bg-teal-500 hover:bg-teal-400 px-7 py-2 text-sm font-medium rounded-md shadow-md transition ease-in-out"
               >
                 <FontAwesomeIcon icon={faUser} className="mr-0.5" /> Login 
+              </button>
+              <button onClick={() => {
+                  logout();
+                  router.push("/")
+                }}
+                className="text-center text-white bg-red-500 hover:bg-red-400 px-7 py-2 text-sm font-medium rounded-md shadow-md transition ease-in-out"
+              >
+                <FontAwesomeIcon icon={faUser} className="mr-0.5" /> Logout
               </button>
             </nav>
           </div>

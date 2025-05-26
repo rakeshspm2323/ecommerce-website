@@ -6,6 +6,9 @@ import Footer from "@/components/Footer";
 import Image from "next/image";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Link as ScrollLink } from "react-scroll";
+import Breadcrumb from "@/components/BreadCrumnb";
+import Login from "@/components/Login";
 
 export default function ProductDetail() {
   const { query } = useRouter();
@@ -14,7 +17,9 @@ export default function ProductDetail() {
     cartItems, 
     addToCart, 
     incrementQuantity, 
-    decrementQuantity 
+    decrementQuantity,
+    loginPopup, 
+    setLoginPopup,
   } = useCart();
 
   useEffect(() => {
@@ -45,6 +50,7 @@ export default function ProductDetail() {
     return (
       <>
         <Header />
+        <div className="pt-[55px]">
         <div className="container mx-auto py-10 animate-pulse px-5">
           <div className="grid grid-cols-1 md:grid-cols-[320px_2fr] gap-5 md:px-0 px-5">
             <div className="w-full max-w-md mx-auto">
@@ -89,6 +95,7 @@ export default function ProductDetail() {
             </div>
           </div>
         </div>
+        </div>
         <Footer />
       </>
     );
@@ -96,10 +103,13 @@ export default function ProductDetail() {
 
   return (
     <>
+    {loginPopup && <Login />}
       <Header />
-      <div className="container mx-auto py-10">
-        <div className="grid grid-cols-1 md:grid-cols-[320px_2fr] gap-10 md:px-0 px-5">
-          <div className="h-full w-full ">
+      <div className="pt-[55px]">
+      <Breadcrumb/>
+      <div className="container mx-auto pb-10">
+        <div className="grid grid-cols-1 md:grid-cols-[320px_2fr] gap-10 md:px-0 px-5 relative">
+          <div className="md:sticky top-24 self-start">
             <div className="flex justify-center items-center border border-teal-500 mb-5 rounded-md ">
               <Image
                 src={product?.thumbnail}
@@ -140,18 +150,27 @@ export default function ProductDetail() {
             </div>
           </div>
 
-          <div className="h-full w-full md:px-5 px-0">
+          <div className="h-full w-full md:px-5 px-0 ">
             <div className="w-full">
               <h1 className="text-lg font-semibold mb-4">{product?.title}</h1>
               <div className="space-y-3">
-                <div className="flex gap-2 items-center ">
-                  <div className="cursor-pointer flex justify-center items-center gap-1 bg-green-500 text-white px-2 py-1 rounded text-sm font-semibold">
-                    {product?.rating} 
-                    <FontAwesomeIcon icon={faStar} className="text-xs mb-0.5" />
+                <ScrollLink
+                  to="Rating&Reviews"
+                  spy={true}
+                  smooth={true}
+                  offset={-70}
+                  duration={500}
+                >
+                  <div className="flex gap-2 items-center">
+                    <div className="cursor-pointer flex justify-center items-center gap-1 bg-green-500 text-white px-2 py-1 rounded text-sm font-semibold">
+                      {product?.rating} 
+                      <FontAwesomeIcon icon={faStar} className="text-xs mb-0.5" />
+                    </div>
+                    <p className="text-gray-500 cursor-pointer">Ratings & Reviews</p>
+                  
                   </div>
-                  <p className="text-gray-500 cursor-pointer">Ratings & Reviews</p>
-                </div>
-                <p className="text-xl font-semibold">${product?.price}</p>
+                </ScrollLink>
+                <p className="text-xl font-semibold mt-3">${product?.price}</p>
                 <p classNmae="font-medium">{product?.description}</p>
               </div>
             </div>
@@ -213,7 +232,7 @@ export default function ProductDetail() {
                 </div>
               </div>
             </div>
-            <div className="w-full mt-5 border-t pt-5">
+            <div id="Rating&Reviews" className="w-full mt-5 border-t pt-5">
               <h2 className="text-lg font-semibold mb-4">Ratings & Reviews</h2>
               <div className="space-y-6">
                 {product?.reviews?.map(review => {
@@ -241,6 +260,7 @@ export default function ProductDetail() {
           
           </div>
         </div>
+      </div>
       </div>
       <Footer />
     </>
